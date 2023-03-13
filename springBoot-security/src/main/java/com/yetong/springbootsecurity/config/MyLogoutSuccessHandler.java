@@ -1,6 +1,8 @@
 package com.yetong.springbootsecurity.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -13,6 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
+
+    @Autowired
+    AuthenticationManagerBuilder authenticationManagerBuilder;
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Map<String, Object> result = new HashMap();

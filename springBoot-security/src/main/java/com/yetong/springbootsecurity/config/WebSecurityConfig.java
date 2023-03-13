@@ -1,6 +1,9 @@
 package com.yetong.springbootsecurity.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -8,6 +11,37 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
+
+//    @Bean
+//    public UserDetailsService config(){
+//        InMemoryUserDetailsManager memoryUserDetails = new InMemoryUserDetailsManager();
+//        memoryUserDetails.createUser(User.withUsername("root").password("{noop}root").roles("admin").build());
+//        return memoryUserDetails;
+//    }
+
+
+    //springBoot  在security的工厂中的默认的AuthenticationManger 不推荐这种做法
+//    @Autowired
+//    public void init(AuthenticationManagerBuilder builder){
+//        System.out.println(builder);
+//    }
+
+
+    //自定义AuthenticationManger 一旦重写了configure方法 那么自定义的认证管理器会覆盖掉SpringBoot中默认的认证管理器
+    @Override
+    protected void configure(AuthenticationManagerBuilder authBuilder) throws Exception {
+        authBuilder.userDetailsService(myUserDetailsService);
+    }
+
+    //想要AuthenticationManger在 其他的bean中使用 需要将springBoot工厂中本地的AuthenticationManger暴露出去
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
