@@ -10,4 +10,7 @@ public class SpringSecuritySplitApplication {
         SpringApplication.run(SpringSecuritySplitApplication.class, args);
     }
 
+
+
+
 }
