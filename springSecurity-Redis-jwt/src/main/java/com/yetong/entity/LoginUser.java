@@ -1,15 +1,16 @@
 package com.yetong.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.*;
 
 /**
  * 登录用户身份权限
- *
  */
-public class LoginUser  implements UserDetails {
+public class LoginUser implements UserDetails {
 
     private Integer id;
     private String username;

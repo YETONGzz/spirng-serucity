@@ -1,9 +1,7 @@
 package com.yetong.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -11,11 +9,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis操作工具类
  */
-@Component
-public class RedisService {
 
-    @Autowired
-    @Qualifier("myRedisTemplate")
+public class RedisUtils {
+
+    @Autowired(required = true)
     private RedisTemplate<String, Object> redisTemplate;
 
 

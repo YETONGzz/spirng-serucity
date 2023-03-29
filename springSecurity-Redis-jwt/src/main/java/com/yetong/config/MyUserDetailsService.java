@@ -1,6 +1,6 @@
 package com.yetong.config;
 
-import com.yetong.dao.UserDao;
+import com.yetong.dao.UserDaoMapper;
 import com.yetong.entity.LoginUser;
 import com.yetong.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService, UserDetailsPasswordService {
 
     @Autowired
-    UserDao userDao;
+    UserDaoMapper userDaoMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginUser user = userDao.loadUserByUsername(username);
-        List<Role> rolesByUid = userDao.getRolesByUid(user.getId());
+        LoginUser user = userDaoMapper.loadUserByUsername(username);
+        List<Role> rolesByUid = userDaoMapper.getRolesByUid(user.getId());
         user.setRoles(rolesByUid);
         return user;
     }
@@ -29,7 +29,7 @@ public class MyUserDetailsService implements UserDetailsService, UserDetailsPass
 
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
-        Integer integer = userDao.updatePassword(user.getUsername(), newPassword);
+        Integer integer = userDaoMapper.updatePassword(user.getUsername(), newPassword);
         if (integer == 1) {
             ((LoginUser) user).setPassword(newPassword);
         }

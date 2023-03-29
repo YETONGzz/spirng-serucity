@@ -1,15 +1,15 @@
 package com.yetong.dao;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yetong.entity.LoginUser;
 import com.yetong.entity.Role;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-@Mapper
-public interface UserDao {
+
+public interface UserDaoMapper extends BaseMapper<LoginUser> {
 
 
     //提供根据用户名返回用户方法
