@@ -20,3 +20,12 @@ server:
       timeout: 1
 mybatis-plus:
   type-aliases-package: com.yetong.entity
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: V9RlaFCwZfxQ#PLJxRfKGU0IGNZKP7Kq
+  # 令牌有效期（默认30分钟）
+  expireTime: 1800
+
