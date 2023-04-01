@@ -16,7 +16,8 @@
     <select id="getAllMenu" resultMap="MenuResultMap">
         select m.*, r.id as rid, r.name as rname, r.nameZh as rnameZh
         from menu m
-        left join menu_role mr on m.`id` = mr.`mid`
-        left join role r on r.`id` = mr.`rid`
+                 left join menu_role mr on m.`id` = mr.`mid`
+                 left join role r on r.`id` = mr.`rid`
+        where m.pattern = #{pattern}
     </select>
 </mapper>

@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MenuDao {
-    List<Menu> getAllMenu();
+    List<Menu> getAllMenu(String pattern);
 }
