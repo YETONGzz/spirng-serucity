@@ -2,7 +2,6 @@ package com.yetong.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +18,7 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 import javax.sql.DataSource;
 
-@Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+public class SecurityJDBCAuthorityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
@@ -72,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
+                .loginProcessingUrl("/doLogin")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new OrRequestMatcher(
