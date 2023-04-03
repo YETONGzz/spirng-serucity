@@ -10,10 +10,7 @@
         select id,
                username,
                password,
-               enabled,
-               accountNonExpired,
-               accountNonLocked,
-               credentialsNonExpired
+               enabled
         from user
         where username = #{username}
     </select>
@@ -21,13 +18,11 @@
 
     <!--根据用户 id 查询角色信息-->
     <select id="getRolesByUid" resultType="com.yetong.entity.Role">
-        select r.id,
-               r.name,
-               r.name_zh nameZh
+        select r.*
         from role r,
              user_role ur
-        where r.id = ur.rid
-          and ur.uid = #{uid}
+        where ur.uid = #{uid}
+          and ur.rid = r.id
     </select>
 
 
