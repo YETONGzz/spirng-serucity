@@ -1,0 +1,33 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/security?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            #客户端id
+            client-id: f73c2660bc1e4f330515
+              #秘钥
+            client-secret: d0a1718c788f2d80c003732eadd98e2b4b1fb439
+              #重定向地址
+            redirect-uri: http://localhost:8080/login/oauth2/code/github
+
+mybatis:
+  type-aliases-package: com.yetong.entity
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com:
+      yetong: debug
+server:
+  reactive:
+    session:
+      timeout: 1
+
