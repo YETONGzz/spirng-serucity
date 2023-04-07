@@ -1,24 +1,23 @@
 package com.yetong.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yetong.util.ResponseUtil;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
+
+/**
+ * 退出成功处理
+ */
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        Map<String, Object> result = new HashMap();
-        result.put("msg", "注销成功" + authentication.getPrincipal());
-        result.put("status", 200);
-        response.setContentType("application/json;charset=UTF-8");
-        String s = new ObjectMapper().writeValueAsString(result);
-        response.getWriter().println(s);
+        SecurityContextHolder.clearContext();
+        ResponseUtil.responseJson(response, ResponseUtil.response(200, "退出成功", null));
     }
 }

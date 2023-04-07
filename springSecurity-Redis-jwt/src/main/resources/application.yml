@@ -7,6 +7,17 @@ spring:
     url: jdbc:mysql://localhost:3306/security?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
+  redis:
+    host: 192.168.18.130
+    port: 6379
+    database: 0
+    password:  #默认为空
+    lettuce:
+      pool:
+        max-active: 20  #最大连接数，负值表示没有限制，默认8
+        max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
+        max-idle: 8     #最大空闲连接，默认8
+        min-idle: 0
 mybatis:
   type-aliases-package: com.yetong.entity
   mapper-locations: classpath:mapper/*.xml
@@ -20,23 +31,18 @@ server:
       timeout: 1
 mybatis-plus:
   type-aliases-package: com.yetong.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # token配置
-token:
+jwt:
   # 令牌自定义标识
-  header: Authorization
+  tokenHeader: Authorization
   # 令牌密钥
   secret: V9RlaFCwZfxQ#PLJxRfKGU0IGNZKP7Kq
   # 令牌有效期（默认30分钟）
   expireTime: 1800
-  redis:
-    host: 192.168.18.131
-    port: 6379
-    database: 0
-    password:  #默认为空
-    lettuce:
-      pool:
-        max-active: 20  #最大连接数，负值表示没有限制，默认8
-        max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
-        max-idle: 8     #最大空闲连接，默认8
-        min-idle: 0
+  tokenPrefix: Bearer
+  expiration: 300
+  refreshTime: 7
+  antMatchers: /login/**,/register/**,/static/**
 

@@ -30,4 +30,5 @@ server:
   reactive:
     session:
       timeout: 1
+  port: 8080
 

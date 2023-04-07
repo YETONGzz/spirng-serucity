@@ -18,11 +18,12 @@ import java.util.Map;
  * 自定义前后端分离 登录过滤器
  */
 
-public  class LoginFilter extends UsernamePasswordAuthenticationFilter {
+public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
     /**
      * 重写认证方法
+     *
      * @param request  from which to extract parameters and perform the authentication
      * @param response the response, which may be needed if the implementation has to do a
      *                 redirect as part of a multi-stage authentication process (such as OpenID).
@@ -37,7 +38,7 @@ public  class LoginFilter extends UsernamePasswordAuthenticationFilter {
         if (request.getContentType().equalsIgnoreCase(MediaType.APPLICATION_JSON_VALUE)) {
             try {
                 Map<String, String> map = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-                request.setAttribute(AbstractRememberMeServices.DEFAULT_PARAMETER,map.get(AbstractRememberMeServices.DEFAULT_PARAMETER));
+                request.setAttribute(AbstractRememberMeServices.DEFAULT_PARAMETER, map.get(AbstractRememberMeServices.DEFAULT_PARAMETER));
                 String userName = map.get("username");
                 String passWord = map.get("password");
                 UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userName, passWord);

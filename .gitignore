@@ -1,2 +1,4 @@
 /springSecurity-Redis-jwt/target/
 /springSecurity-Redis-jwt/target/
+/springSecurity-split/target/
+**/target/

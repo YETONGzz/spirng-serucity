@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-
     @RequestMapping("/hello2")
     public void hello2(){
         System.out.println("hello");
@@ -20,5 +19,4 @@ public class HelloController {
     public void employee(){
         System.out.println("employee");
     }
-
 }

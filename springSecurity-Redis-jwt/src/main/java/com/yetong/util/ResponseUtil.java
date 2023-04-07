@@ -13,6 +13,27 @@ import java.io.IOException;
 public class ResponseUtil {
 
     /**
+     * 返回编码
+     */
+    private Integer code;
+
+    /**
+     * 返回消息
+     */
+    private String msg;
+
+    /**
+     * 返回数据
+     */
+    private Object data;
+
+    public ResponseUtil(Integer code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    /**
      * 获取request
      */
     public static HttpServletRequest getRequest() {
@@ -39,18 +60,29 @@ public class ResponseUtil {
     }
 
     /**
+     * 返回信息
+     *
+     * @param code 返回编码
+     * @param msg  返回消息
+     * @param data 返回数据
+     * @return
+     */
+    public static ResponseUtil response(Integer code, String msg, Object data) {
+        return new ResponseUtil(code, msg, data);
+    }
+
+    /**
      * 将data渲染到客户端
      *
      * @param response
      * @param status
      * @param data
      */
-    public static void responseJson(HttpServletResponse response, int status, Object data) {
+    public static void responseJson(HttpServletResponse response,  Object data) {
         try {
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "*");
             response.setContentType("application/json;charset=UTF-8");
-            response.setStatus(status);
             String s = new ObjectMapper().writeValueAsString(data);
             response.getWriter().write(s);
         } catch (IOException e) {

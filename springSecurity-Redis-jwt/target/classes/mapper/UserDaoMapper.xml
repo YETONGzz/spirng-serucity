@@ -10,10 +10,7 @@
         select id,
                username,
                password,
-               enabled,
-               accountNonExpired,
-               accountNonLocked,
-               credentialsNonExpired
+               enabled
         from user
         where username = #{username}
     </select>
